@@ -6,7 +6,14 @@ import java.io.OutputStreamWriter;
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.nio.FloatBuffer;
+import java.nio.ShortBuffer;
+
+import javax.microedition.khronos.opengles.GL10;
+
 import android.annotation.TargetApi;
+import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
@@ -20,6 +27,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+
 
 @TargetApi(Build.VERSION_CODES.KITKAT)
 public class CreateMessageActivity extends ActionBarActivity {
@@ -90,6 +98,9 @@ public class CreateMessageActivity extends ActionBarActivity {
 			return rootView;
 		}
 	}
+	
+
+
 	 public void createMessage(View view){
 	    	// Do something in response to button
 	    Intent intent = new Intent(this,CreateMessageActivity.class);
@@ -99,8 +110,9 @@ public class CreateMessageActivity extends ActionBarActivity {
 	    startActivity(intent);
 	    }
 	
+	 //the following code is place holder, may or may not be used...
 	 /* Checks if external storage is available for read and write */
-	 public boolean isEXternalStorageWritable() {
+	 /*public boolean isEXternalStorageWritable() {
 		 String state = Environment.getExternalStorageState();
 		 if (Environment.MEDIA_MOUNTED.equals(state)) {
 			 return true;
@@ -151,7 +163,7 @@ public class CreateMessageActivity extends ActionBarActivity {
 			 e.printStackTrace();
 			
 		 }
-	 }
+	 }*/
 }
 	/* public void viewMessage(File file){
 		 // try opening the myfilename.txt

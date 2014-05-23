@@ -11,13 +11,20 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.os.Build;
+import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
-
 import java.io.*;
+import java.nio.FloatBuffer;
+import java.nio.ShortBuffer;
 import java.util.ArrayList;
 import java.util.List;
+import javax.microedition.khronos.opengles.GL10;
+import android.opengl.EGLConfig;
+import android.opengl.GLES20;
+import android.opengl.GLSurfaceView;
+import android.opengl.EGLConfig;
 
-import com.example.codeonly.Filereader;
 
 public class MainActivity extends ActionBarActivity {
 	public final static String EXTRA_MESSAGE = "com.example.myfirstapp.MESSAGE";
@@ -93,16 +100,69 @@ public class MainActivity extends ActionBarActivity {
     	startActivity(intent);
     	
     }
+    public class OpenGLES20Activity extends Activity {
+		private GLSurfaceView mGLView;
+		
+		@Override
+		public void onCreate(Bundle savedInstanceState) {
+			super.onCreate(savedInstanceState);
+			
+			//Create a G:SurfaceView instance and set it
+			//as the ContentView for this Activity.
+			mGLView = new MyGLSurfaceView(this);
+			setContentView(mGLView);
+		}
+	}
+	
+	class MyGLSurfaceView extends GLSurfaceView {
+		//Create an OpenGL ES 2.0 context
+		setEGLContextClientVersion(2);
+		
+		public MyGLSurfaceView(Context context) {
+			super(context);
+			
+			//Set the Renderer for drawing on the GLSurfaceView
+			setRenderer(new MyRenderer());
+			setRenderMode(GLSurfaceView.RENDERMODE_WHEN_DIRTY);
+		}
+	}
+	
+	public class MyGLRenderer implements GLSurfaceView.Renderer {
+		
+		public void onSurfaceCreated(GL10 unused, EGLConfig config) {
+			//Set the background frame color
+			GLES20.glClearColor(0.0f,  0.0f,  0.0f, 1.0f);
+		}
+		
+		public void onDrawFrame(GL10 unused) {
+			//Redraw background color
+			GLES20.glClear(GLES20.GL_COLOR_BUFFER_BIT);
+		}
+		
+		public void onSurfaceChanged(GL10 unused, int width, int height) {
+			GLES20.glViewport(0, 0, width, height);
+		}
+	}
+	
+	public class Square {
+		
+		private FloatBuffer vertexBuffer;
+		private ShortBuffer drawListBuffer;
+		
+		//number of coordinates per vertex in this array
+		static final int COORDS_PER_VERTEX = 3;
+	}
+
     public static class FileSorting  {
 		
 		String Filename = textfield; 
-			public WriteFile(){
+			public void WriteFile(){
 				/* this method creates a new file then places the file in the stream.
 				 * then the stream takes texts from a field and out puts it
 				*/
 				File file = new File (Filename);
 				BufferedWriter out = new BufferedWriter(new FileWriter(file));
-				out.write(text);
+				out.write(R.editText1);
 				out.close();
 			}
 			public String readFileAsString(String filename) throws IOException
@@ -122,7 +182,7 @@ public class MainActivity extends ActionBarActivity {
 			{
 			//http://alvinalexander.com/java/java-file-utilities-open-read-write-copy-files
 				List<String> record = new ArrayList<String>();
-				BufferedReader reader = new BufferedReader(new Filereader(filename));
+				BufferedReader reader = new BufferedReader(new FileReader(filename));
 				String line;
 				while((line = reader.readLine())!=null){
 					records.add(line);

@@ -10,12 +10,13 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.os.Build;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InvalidObjectException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+
+import com.chimi.myfirstapp.R;
 
 import android.app.Activity;
 

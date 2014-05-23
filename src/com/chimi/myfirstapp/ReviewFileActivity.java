@@ -27,12 +27,11 @@ public class ReviewFileActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_review_file);
 
-		 if (savedInstanceState == null) {
-	            getFragmentManager().beginTransaction()
-	    .add(R.id.container, new PlaceholderFragment())
-	                    .commit();
+		 /*if (savedInstanceState == null) {
+	            getFragmentManager().beginTransaction().add(R.id.container, new PlaceholderFragment())
+	                    .commit();*/
 		}
-	}
+	
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
